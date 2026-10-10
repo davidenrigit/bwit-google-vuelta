@@ -40,7 +40,9 @@
 <script>
 (function () {
   // Solo la red local, Tailscale (100.64.0.0/10), este equipo o un nombre sin puntos como «vm-portal».
-  var PERMITIDO = /^https?:\/\/(localhost|127\.0\.0\.1|\[::1\]|10(\.\d{1,3}){3}|192\.168(\.\d{1,3}){2}|172\.(1[6-9]|2\d|3[01])(\.\d{1,3}){2}|100\.(6[4-9]|[7-9]\d|1[01]\d|12[0-7])(\.\d{1,3}){2}|[a-z0-9-]+)(:\d{1,5})?$/i;
+  // El nombre sin puntos empieza por letra: «http://134744072» o «http://0x08080808» el navegador
+  // los lee como una IP, y pueden ser de internet (revisión de seguridad del 10-10-2026).
+  var PERMITIDO = /^https?:\/\/(localhost|127\.0\.0\.1|\[::1\]|10(\.\d{1,3}){3}|192\.168(\.\d{1,3}){2}|172\.(1[6-9]|2\d|3[01])(\.\d{1,3}){2}|100\.(6[4-9]|[7-9]\d|1[01]\d|12[0-7])(\.\d{1,3}){2}|[a-z][a-z0-9-]*)(:\d{1,5})?$/i;
   var mensaje = document.getElementById('mensaje');
   function decir(texto) { mensaje.textContent = texto; }
   try {
